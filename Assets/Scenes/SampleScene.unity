@@ -207,6 +207,9 @@ GameObject:
   - component: {fileID: 1221944086}
   - component: {fileID: 1221944090}
   - component: {fileID: 1221944089}
+  - component: {fileID: 1221944093}
+  - component: {fileID: 1221944092}
+  - component: {fileID: 1221944091}
   m_Layer: 0
   m_Name: Unitychan
   m_TagString: Untagged
@@ -337,6 +340,60 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.15}
   serializedVersion: 2
   m_Radius: 0.09
+--- !u!114 &1221944091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221944085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cfe79bb2098c2418b0ec2b411e68ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontal: 0
+  vertical: 0
+  jump: 0
+  moveSpeed: 2
+  heightOffset: 0.2
+  onGround: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &1221944092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221944085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040886177c3610440a9dc703c3e5e2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1221944093
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221944085}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1562438288
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +405,7 @@ GameObject:
   - component: {fileID: 1562438291}
   - component: {fileID: 1562438290}
   - component: {fileID: 1562438289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Test ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
