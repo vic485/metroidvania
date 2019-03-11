@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -18,7 +19,8 @@ namespace DataSerialization
             try
             {
                 var dataArray = Convert.FromBase64String(File.ReadAllText(filePath));
-                return JsonConvert.DeserializeObject<SaveData>(Encoding.UTF8.GetString(dataArray));
+                using (var dataStream = new MemoryStream(dataArray))
+                    return new BinaryFormatter().Deserialize(dataStream) as SaveData;
             }
             catch
             {
@@ -42,10 +44,12 @@ namespace DataSerialization
                 File.Move(filePath, backupPath);
             }
 
-            var dataString = JsonConvert.SerializeObject(data, Formatting.Indented);
-            //File.WriteAllText(Path.Combine(Application.dataPath, "plaintextSave.json"), dataString);
-            var dataArray = Encoding.UTF8.GetBytes(dataString);
-            File.WriteAllText(filePath, Convert.ToBase64String(dataArray));
+            using (var dataStream = new MemoryStream())
+            {
+                var bf = new BinaryFormatter();
+                bf.Serialize(dataStream, data);
+                File.WriteAllText(filePath, Convert.ToBase64String(dataStream.ToArray()));
+            }
         }
     }
 }
