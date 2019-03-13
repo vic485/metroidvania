@@ -8,6 +8,7 @@ namespace Controller
         private float _vertical;
 
         private bool _jump;
+        private bool _shoot;
 
         private PlayerController _controller;
 
@@ -30,6 +31,7 @@ namespace Controller
             _vertical = Input.GetAxisRaw("Vertical");
 
             _jump = Input.GetButtonDown("Jump");
+            _shoot = Input.GetButtonDown("Fire");
         }
 
         private void UpdateStates()
@@ -37,6 +39,7 @@ namespace Controller
             _controller.horizontal = _horizontal;
             _controller.vertical = _vertical;
             _controller.jump = _jump;
+            _controller.shoot = _shoot;
         }
     }
 }

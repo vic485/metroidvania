@@ -7,6 +7,7 @@ namespace Controller
         [Header("Inputs")] public float horizontal;
         public float vertical;
         public bool jump;
+        public bool shoot;
 
         [Header("Stats")] public float moveSpeed = 2.0f;
         public float heightOffset = 0.2f;
@@ -24,6 +25,7 @@ namespace Controller
         private static readonly int HashSpeed = Animator.StringToHash("Speed");
         private static readonly int HashFallSpeed = Animator.StringToHash("FallSpeed");
         private static readonly int HashGroundDistance = Animator.StringToHash("GroundDistance");
+        private static readonly int HashAttack = Animator.StringToHash("Attack");
 
         #endregion
 
@@ -44,6 +46,9 @@ namespace Controller
             if (jump && onGround)
                 jumpForce = 5f;
             
+            if (shoot)
+                _anim.SetTrigger(HashAttack);
+            
             _rigid.velocity = new Vector2(horizontal * moveSpeed, jumpForce);
 
             var groundDist = GroundCheck();
@@ -58,7 +63,9 @@ namespace Controller
 
         private float GroundCheck()
         {
-            var distanceFromGround = Physics2D.Raycast(transform.position, Vector2.down, 1, groundMask);
+            //var distanceFromGround = Physics2D.Raycast(transform.position, Vector2.down, 1, groundMask);
+            var distanceFromGround =
+                Physics2D.BoxCast(transform.position, new Vector2(0.1792773f, 0.1792773f), 0f, Vector2.down, 1f, groundMask);
 
             var noHit = Mathf.Approximately(distanceFromGround.distance, 0f);
             onGround = !noHit && distanceFromGround.distance <= 0.3f;
